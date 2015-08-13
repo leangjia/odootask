@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <act_window id="action_odoo_task" res_model="odootask.task" name="action_odoo_task" view_mode="tree,form"/>
+        <act_window id="action_odoo_task_category" res_model="odootask.task_category" name="action_odoo_task_category" view_mode="tree,form"/>
+
+        <menuitem id="menuitem_main" name="odoo task"></menuitem>
+        <menuitem id="menuitem_tasks" parent="odootask.menuitem_main" name="odoo task"></menuitem>
+        <menuitem id="menuitem_task" parent="odootask.menuitem_tasks" name="odoo task" action="odootask.action_odoo_task"></menuitem>
+        <menuitem id="menuitem_task_category" parent="odootask.menuitem_tasks" name="odoo task category" action="odootask.action_odoo_task_category"></menuitem>
+
+        <record id="task_view_tree" model="ir.ui.view">
+            <field name="name">odoo task view tree </field>
+            <field name="model">odootask.task</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

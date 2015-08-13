@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="teams" name="index">
+            <t t-call="odootask.main_layout">
+                <t t-set="title" t-value="'团队'"/>
+                <p>这是团队/个人浏览页面，用layout重构了。</p>
+            </t>
+        </template>
+    </data>
+</openerp>

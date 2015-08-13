@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="tasks" name="task_index">
+            <t t-call="odootask.main_layout">
+                <t t-set="title" t-value="'任务'"/>
+                <div class="container">
+                    <div class="row">
+                        <!--左侧导航-->
+                        <div class="col-md-2">
+                            <div class="list-group">
+                                <t t-foreach="count_for_category" t-as="cfc">
+                                    <a t-attf-class="list-group-item {{'active' if cfc[1]==category_id else ''}}"
+                                       t-attf-href="/tasks?{{ 'k=%s' % keyword if keyword else ''}}{{'&amp;c=%d' % cfc[1]}}">
+                                        <t t-esc="cfc[0]"/>
+                                        <span class="badge">
+                                            <t t-esc="count_for_category[cfc]"/>
+                                        </span>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                        <!--右侧任务列表-->
+                        <div class="col-md-10">
+                            <div class="row">
+                                <p>
+                                    <div class="col-md-3">
+                                        <!-- 排序方式选择 -->
+                                        排序方式
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                发布时间
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="#">发布时间 近->远</a>
+                                                </li>
+                                                <li role="separator" class="divider"></li>
+                                                <li>
+                                                    <a href="#">报酬 高->低</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">报酬 低->高</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-6">
+                                        <a href="/task" target="_self" class="btn btn-primary btn-lg btn-block">
+                                            发布一个新任务
+                                        </a>
+                                    </div>
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <p>
+                                    <ul class="list-group">
+                                        <t t-foreach="tasks" t-as="task">
+                                            <li class="list-group-item">
+                                                <p>
+                                                    <a t-attf-href="/task/{{task.id}}" target="_self">
+                                                        <t t-esc="task.name"/>
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <t t-esc="task.description"/>
+                                                </p>
+                                                <p>
+                                                    <small>
+                                                        <a t-attf-href="/user/{{task.create_uid.id}}">
+                                                            <t t-esc="task.create_uid.name"/>
+                                                        </a>
+                                                        <!--<span class="glyphicon glyphicon-time" aria-hidden="true"/>-->
+                                                        <span>
+                                                            <t t-esc="task.create_date"/>
+                                                        </span>
+                                                    </small>
+                                                </p>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </p>
+                                <!--<div class="panel panel-default">-->
+                                <!--&lt;!&ndash; Default panel contents &ndash;&gt;-->
+                                <!--<div class="panel-heading">Panel heading</div>-->
+                                <!--<div class="panel-body">-->
+                                <!--<p>...</p>-->
+                                <!--</div>-->
+
+                                <!--&lt;!&ndash; List group &ndash;&gt;-->
+
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="task_new" name="task_new">
+            <t t-call="odootask.main_layout">
+                <t t-set="title" t-value="'任务'"/>
+                <form class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">标题</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName" name="name" placeholder="任务标题"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription" class="col-sm-2 control-label">任务说明</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDescription" name="description"
+                                   placeholder="任务说明"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCategory" class="col-sm-2 control-label">分类</label>
+                        <div class="col-sm-10">
+                            <select id="selectCategory" class="form-control" name="category_id">
+                                <t>
+                                    <t t-foreach="task_categories" t-as="category">
+                                        <option t-attf-value="{{category.id}}">
+                                            <t t-esc="category.name"/>
+                                        </option>
+                                    </t>
+                                </t>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </t>
+        </template>
+
+        <template id="task" name="task">
+            <t t-call="odootask.main_layout">
+                <t t-set="title" t-value="'任务'"/>
+                <div class="container">
+                    <div class="row page-header">
+                        <h1>
+                            <t t-esc="task.name"/>
+                        </h1>
+                    </div>
+                    <div class="row">
+                        <dl class="dl-horizontal">
+                            <dt>任务描述</dt>
+                            <dd>
+                                <t t-raw="task.description"/>
+                            </dd>
+                            <dt>分类名称</dt>
+                            <dd>
+                                <t t-esc="task.category_id.name"/>
+                            </dd>
+                            <dt>发布人</dt>
+                            <dd>
+                                <a t-attf-href="/user/{{task.create_uid.id}}">
+                                    <t t-esc="task.create_uid.name"/>
+                                    <t t-if="user_id == task.create_uid.id">(你自己)</t>
+                                </a>
+                            </dd>
+                            <dt>发布日期</dt>
+                            <dd>
+                                <t t-esc="task.create_date"/>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="row">
+                        <t t-foreach="task.comment_ids" t-as="comment">
+                            <p>
+                                <span>
+                                    <t t-esc="comment.content"/>
+                                </span>
+                                <span>by
+                                    <t t-esc="comment.create_uid.name"/>
+                                </span>
+                                <span>at
+                                    <t t-esc="comment.create_date"/>
+                                </span>
+                            </p>
+                        </t>
+                    </div>
+                    <t t-if="user_id != task.create_uid.id">
+                        <div class="row">
+                            <a class="btn btn-primary" t-attf-href="/task/apply/{{task.id}}" role="button">申请接受此任务</a>
+                        </div>
+                    </t>
+                    <div class="row">
+                        <form class="form-horizontal" t-attf-action="/task/{{task.id}}/comment" method="post">
+                            <div class="form-group">
+                                <label for="inputContent" class="col-sm-2 control-label">评论内容</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="inputContent" name="content"
+                                           placeholder="任务标题"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-4">
+                                    <button type="submit" class="btn btn-default">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <nav>
+                            <ul class="pager">
+                                <li>
+                                    <a href="#">Previous</a>
+                                </li>
+                                <li>
+                                    <a href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</openerp>

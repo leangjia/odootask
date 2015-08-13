@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="about" name="index">
+            <t t-call="odootask.main_layout">
+                <t t-set="title" t-value="'关于'"/>
+                <p>这个老糖做的网站，用layout重构了。</p>
+            </t>
+        </template>
+    </data>
+</openerp>

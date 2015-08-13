@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="group_odootask_user" model="res.groups">
+            <field name="name">Odoo Task User</field>
+            <field name="comment">网站用户</field>
+        </record>
+    </data>
+</openerp>

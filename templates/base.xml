@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="website_assets_css" name="header">
+            <!-- 新 Bootstrap 核心 CSS 文件 -->
+            <link rel="stylesheet" href="/odootask/static/css/bootstrap.min.css"/>
+            <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+            <link rel="stylesheet" href="/odootask/static/css/bootstrap-theme.min.css"/>
+        </template>
+
+        <template id="website_assets_js" name="header">
+            <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+            <script src="/odootask/static/js/jquery.min.js"></script>
+            <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+            <script src="/odootask/static/js/bootstrap.min.js"></script>
+
+            <script src="odootask/static/js/main_nav.js"></script>
+        </template>
+
+        <template id="main_nav">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">odoo task</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown"
+                                   role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <span id="nav_item_finding_title">任务</span>
+                                    <span class="caret"/>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a id="nav_item_find_task">找任务</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a id="nav_item_find_team">找团队/个人</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <form id="nav_item_form_search" class="navbar-form navbar-left" role="search" action="/tasks"
+                              method="get">
+                            <div class="form-group">
+                                <input name="k" type="text" class="form-control" placeholder="关键词"/>
+                            </div>
+                            <button type="submit" class="btn btn-default">搜索</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-left">
+                            <!--任务链接-->
+                            <li t-attf-class="{{'active' if main_nav_task_active else ''}}">
+                                <a href="/tasks">任务
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <!--团队/人个链接-->
+                            <li t-attf-class="{{'active' if main_nav_team_active else ''}}">
+                                <a href="/teams">团队/个人</a>
+                            </li>
+                            <!--关于-->
+                            <li t-attf-class="{{'active' if main_nav_about_active else ''}}">
+                                <a href="/about">关于</a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li t-if="is_public">
+                                <a t-attf-href="/web/login{{'?redirect=%s' % login_redirect if login_redirect else ''}}">
+                                    登录
+                                </a>
+                            </li>
+                            <li t-if="is_login">
+                                <p class="navbar-text navbar-left">
+                                    你好，
+                                    <a href="/user" class="navbar-link">
+                                        <t t-esc="username"/>
+                                    </a>
+                                </p>
+                            </li>
+                            <li t-if="is_login and not is_public">
+                                <a href="/web/logout">注销</a>
+                            </li>
+
+                            <li t-if="is_login and is_admin">
+                                <a href="/web" target="_blank">后台管理</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+
+            </nav>
+        </template>
+
+        <template id="main_footer">
+            <div class="well well-sm">Powered by
+                <a href="http://www.odoo.com" target="_blank">odoo</a>
+            </div>
+        </template>
+
+        <template id="main_layout">
+            &lt;!DOCTYPE html&gt;
+            <html lang="zh-CN">
+                <head>
+                    <title>
+                        <t t-esc="title"/>
+                    </title>
+                    <t t-call="odootask.website_assets_css"/>
+                </head>
+                <body>
+                    <t t-call="odootask.main_nav"/>
+                    <div name="content">
+                        <t t-raw="0"/>
+                    </div>
+                    <t t-call="odootask.main_footer"/>
+                    <t t-call="odootask.website_assets_js"/>
+                </body>
+            </html>
+        </template>
+    </data>
+</openerp>
