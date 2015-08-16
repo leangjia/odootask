@@ -10,9 +10,9 @@ class TaskController(openerp.http.Controller):
     def index(self, **kwargs):
         para_keyword = kwargs.get("k", "")
         para_category_id = kwargs.get("c", "")
-        order = kwargs.get("o", "create_date")
-        page = int(kwargs.get("p", "0"))
-        qty_per_page = int(kwargs.get("n", "10"))
+        para_order = kwargs.get("o", "create_date")
+        para_page = kwargs.get("p", "0")
+        para_qty_per_page = kwargs.get("n", "10")
 
         domain = list()
         if para_keyword:
@@ -22,11 +22,14 @@ class TaskController(openerp.http.Controller):
 
         env = request.env
 
-        total_page_count = int(math.ceil(env['odootask.task'].sudo().search_count(domain) / float(qty_per_page)))
-        tasks = env['odootask.task'].sudo().search(domain, order="%s desc" % order, offset=page * qty_per_page,
-                                                   limit=qty_per_page)
-        categories = env["odootask.task_category"].sudo().search([])
+        page_count = int(math.ceil(env['odootask.task'].sudo().search_count(domain) / float(para_qty_per_page)))
 
+        page = int(para_page)
+        qty_per_page = int(para_qty_per_page)
+        tasks = env['odootask.task'].sudo().search(domain, order="%s desc" % para_order, offset=page * qty_per_page,
+                                                   limit=qty_per_page)
+
+        categories = env["odootask.task_category"].sudo().search([])
         count_for_category = [
             ((cat.name, cat.id),
              env['odootask.task'].sudo().search_count([("name", "ilike", para_keyword), ("category_id", "=", cat.id)]))
@@ -34,20 +37,18 @@ class TaskController(openerp.http.Controller):
 
         if para_keyword:
             count_for_category = filter(lambda cfc: cfc[1] > 0, count_for_category)
-
         count_for_category = dict(count_for_category)
 
         context = dict()
         context["tasks"] = tasks
         context["count_for_category"] = count_for_category
-        if para_category_id:
-            context["category_id"] = int(para_category_id)
-        else:
-            context["category_id"] = -1
-        context["keyword"] = para_keyword
 
+        context["category_id"] = para_category_id
+        context["keyword"] = para_keyword
+        context["page"] = para_page
         context["main_nav_task_active"] = True
         context["login_redirect"] = "/tasks"
+        context["page_count"] = page_count
 
         return odootask_qweb_render.render("odootask.tasks", context=context)
 

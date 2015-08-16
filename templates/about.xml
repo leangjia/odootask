@@ -4,7 +4,7 @@
         <template id="about" name="index">
             <t t-call="odootask.main_layout">
                 <t t-set="title" t-value="'关于'"/>
-                <p>这个老糖做的网站，用layout重构了。</p>
+                <p>这个老糖做的网站，用layout重构了。这是关于页面</p>
             </t>
         </template>
     </data>

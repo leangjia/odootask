@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+        <template id="tasks_pager">
+            <nav>
+                <!--已经提供的参数：-->
+                <!--1、page：当前页数-->
+                <!--2、keyword：关键词-->
+                <!--3、page_count：总页数-->
+                <!--3、category_id：选中的产品分类-->
+                <t t-set="page" t-value="int(page)"/>
+                <ul class="pagination">
+                    <t t-if="page &gt; 0">
+                        <li>
+                            <a t-attf-href="/tasks/?k={{key_work or ''}}&amp;p={{page-1}}&amp;c={{category_id or ''}}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-if="page &lt;= 0">
+                        <li class="disabled">
+                            <a t-attf-href="" aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-foreach="range(0,page_count)" t-as="p">
+                        <li t-attf-class="{{ 'active' if page == p else '' }}">
+                            <a t-attf-href="/tasks/?k={{key_work or ''}}&amp;p={{p}}&amp;c={{category_id or ''}}">
+                                <t t-esc="p+1"/>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-if="page &gt;= page_count-1">
+                        <li class="disabled">
+                            <a t-attf-href="" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                    </t>
+                    <t t-if="page &lt; page_count-1">
+                        <li>
+                            <a t-attf-href="/tasks/?k={{key_work or ''}}&amp;p={{page_count-1}}&amp;c={{category_id or ''}}"
+                               aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                    </t>
+
+                </ul>
+            </nav>
+        </template>
+
         <template id="tasks" name="task_index">
             <t t-call="odootask.main_layout">
                 <t t-set="title" t-value="'任务'"/>
@@ -22,6 +73,7 @@
                         </div>
                         <!--右侧任务列表-->
                         <div class="col-md-10">
+                            <!--排序和发布新任务-->
                             <div class="row">
                                 <p>
                                     <div class="col-md-3">
@@ -55,7 +107,13 @@
                                     </div>
                                 </p>
                             </div>
+                            <!--任务分页-->
+                            <div class="row">
+                                <t t-call="odootask.tasks_pager">
 
+                                </t>
+                            </div>
+                            <!--任务列表-->
                             <div class="row">
                                 <p>
                                     <ul class="list-group">
@@ -94,6 +152,12 @@
                                 <!--&lt;!&ndash; List group &ndash;&gt;-->
 
                                 <!--</div>-->
+                            </div>
+                            <!--任务分页-->
+                            <div class="row">
+                                <t t-call="odootask.tasks_pager">
+
+                                </t>
                             </div>
                         </div>
                     </div>
