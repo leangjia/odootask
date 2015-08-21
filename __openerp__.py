@@ -1,7 +1,7 @@
 {
     'name': "Odoo Task",
     'version': '1.0',
-    'depends': ['base'],
+    'depends': ['base', "mail"],
     'author': "Wangting",
     'category': 'Category',
     'description': """
@@ -10,6 +10,7 @@
     # # data files always loaded at installation
     'data': [
         "data/group.xml",
+        "models/odootask_workflow.xml",
         'templates/base.xml',
         'templates/index.xml',
         'templates/task.xml',

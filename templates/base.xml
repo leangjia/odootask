@@ -73,7 +73,7 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li t-if="is_public">
-                                <a t-attf-href="/web/login{{'?redirect=%s' % login_redirect if login_redirect else ''}}">
+                                <a t-attf-href="/web/login{{'?redirect=%s' % login_redirect or ''}}">
                                     登录
                                 </a>
                             </li>

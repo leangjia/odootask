@@ -41,7 +41,7 @@
                     </t>
                     <t t-if="page &lt; page_count-1">
                         <li>
-                            <a t-attf-href="/tasks/?k={{key_work or ''}}&amp;p={{page_count-1}}&amp;c={{category_id or ''}}"
+                            <a t-attf-href="/tasks/?k={{key_work or ''}}&amp;p={{page+1}}&amp;c={{category_id or ''}}"
                                aria-label="Next">
                                 <span aria-hidden="true">&gt;</span>
                             </a>

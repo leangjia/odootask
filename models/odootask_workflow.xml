@@ -1,0 +1,77 @@
+<openerp>
+    <data>
+        <record id="odootask_workflow" model="workflow">
+            <field name="name">odootask.workflow</field>
+            <field name="osv">odootask.task</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <record id="activity_odootask_start" model="workflow.activity">
+            <field name="wkf_id" ref="odootask_workflow"/>
+            <field name="name">start</field>
+            <field name="flow_start">True</field>
+            <field name="kind">dummy</field>
+        </record>
+
+        <record id="activity_odootask_draft" model="workflow.activity">
+            <field name="wkf_id" ref="odootask_workflow"/>
+            <field name="name">draft</field>
+            <field name="kind">function</field>
+            <field name="action">draft()</field>
+        </record>
+
+        <record id="activity_odootask_confirm" model="workflow.activity">
+            <field name="wkf_id" ref="odootask_workflow"/>
+            <field name="name">confirm</field>
+            <field name="kind">dummy</field>
+        </record>
+
+        <record id="activity_odootask_approve" model="workflow.activity">
+            <field name="wkf_id" ref="odootask_workflow"/>
+            <field name="flow_stop">False</field>
+            <field name="name">approve</field>
+            <field name="kind">function</field>
+            <field name="action">approve()</field>
+        </record>
+
+        <record id="activity_odootask_applying" model="workflow.activity">
+            <field name="wkf_id" ref="odootask_workflow"/>
+            <field name="flow_stop">False</field>
+            <field name="name">applying</field>
+            <field name="kind">function</field>
+            <field name="action">applying()</field>
+        </record>
+
+        <record id="trans_start_draft" model="workflow.transition">
+            <field name="act_from" ref="activity_odootask_start"/>
+            <field name="act_to" ref="activity_odootask_draft"/>
+            <field name="condition">state=='draft'</field>
+        </record>
+
+        <record id="trans_draft_confirm" model="workflow.transition">
+            <field name="act_from" ref="activity_odootask_draft"/>
+            <field name="act_to" ref="activity_odootask_confirm"/>
+            <field name="condition">state=='confirmed'</field>
+        </record>
+
+        <record id="trans_confirm_approve" model="workflow.transition">
+            <field name="act_from" ref="activity_odootask_confirm"/>
+            <field name="act_to" ref="activity_odootask_approve"/>
+            <field name="signal">approve</field>
+        </record>
+
+        <record id="trans_confirm_draft" model="workflow.transition">
+            <field name="act_from" ref="activity_odootask_confirm"/>
+            <field name="act_to" ref="activity_odootask_draft"/>
+            <field name="signal">refuse</field>
+        </record>
+
+        <record id="trans_approve_applying" model="workflow.transition">
+            <field name="act_from" ref="activity_odootask_approve"/>
+            <field name="act_to" ref="activity_odootask_applying"/>
+            <field name="condition">state=='approve'</field>
+        </record>
+
+
+    </data>
+</openerp>
