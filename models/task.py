@@ -21,7 +21,6 @@ class Task(models.Model):
     @api.one
     def apply(self, applier_id):
         self.write({"applier_ids": [(4, applier_id, 0)]})
-        # user = self.env["res.user"].sudo().search("id","=",applier_id)
 
     @api.one
     def approve(self):
