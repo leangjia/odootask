@@ -10,7 +10,7 @@
     # # data files always loaded at installation
     'data': [
         "data/group.xml",
-        "models/odootask_workflow.xml",
+        "workflow/odootask_workflow.xml",
         'templates/base.xml',
         'templates/index.xml',
         'templates/task.xml',
