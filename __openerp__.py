@@ -17,7 +17,8 @@
         "templates/about.xml",
         "templates/team.xml",
         "templates/user.xml",
-        "views/task.xml"
+        "views/task.xml",
+        "templates/base_black_theme.xml"
     ],
     # # data files containing optionally loaded demonstration data
     # 'demo': [

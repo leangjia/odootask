@@ -2,9 +2,11 @@
 <openerp>
     <data>
         <template id="about" name="index">
-            <t t-call="odootask.main_layout">
+            <t t-call="odootask.main_layout_black_theme">
                 <t t-set="title" t-value="'关于'"/>
-                <p>这个老糖做的网站，用layout重构了。这是关于页面</p>
+                <p id="p_msg">p_msg</p>
+                <script type="application/dart" src="odootask/static/dart/web/dart_web.dart"></script>
+                <script src="packages/browser/dart.js"></script>
             </t>
         </template>
     </data>

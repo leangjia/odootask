@@ -1,0 +1,192 @@
+<openerp>
+    <data>
+        <template id="main_layout_black_theme">
+            &lt;!DOCTYPE html&gt;
+            <!--[if lt IE 7 ]><html lang="en" class="no-js ie6"> <![endif]-->
+            <!--[if IE 7 ]><html lang="en" class="no-js ie7"> <![endif]-->
+            <!--[if IE 8 ]><html lang="en" class="no-js ie8"> <![endif]-->
+            <!--[if IE 9 ]><html lang="en" class="no-js ie9"> <![endif]-->
+            <!--[if (gt IE 9)|!(IE)]><!-->
+            <html lang="en" class="no-js"> <!--<![endif]-->
+                <head>
+                    <meta charset="utf-8"/>
+                    <meta name="author" content=""/>
+                    <meta name="keywords" content=""/>
+                    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+                    <title></title>
+
+                    <!-- main JS libs -->
+                    <script src="odootask/static/js/libs/modernizr.min.js"></script>
+                    <script src="odootask/static/js/libs/jquery-1.10.0.js"></script>
+                    <script src="odootask/static/js/libs/jquery-ui.min.js"></script>
+                    <script src="odootask/static/js/libs/bootstrap.min.js"></script>
+
+                    <!--[if lte IE 8]>
+                        <script type="text/javascript" src="js/excanvas.min.js"></script>
+                    <![endif]-->
+                    <script type="text/javascript" src="odootask/static/js/jquery.flot.js"></script>
+                    <script type="text/javascript" src="odootask/static/js/jquery.flot.resize.js"></script>
+
+                    <!-- Style CSS -->
+                    <link href="odootask/static/css/bootstrap.css" media="screen" rel="stylesheet"/>
+                    <link href="odootask/static/style.css" media="screen" rel="stylesheet"/>
+
+                    <!-- scripts -->
+                    <script src="odootask/static/js/general.js"></script>
+
+                    <!-- Include all needed stylesheets and scripts here -->
+
+
+                    <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+                    <!--[if gte IE 9]>
+                    <style type="text/css">
+                        .gradient {filter: none !important;}
+                    </style>
+                    <![endif]-->
+                </head>
+
+                <body>
+                    <div class="body_wrap" style="min-height: 700px;">
+                        <div class="container">
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="dropdown-wrap boxed-velvet">
+                                        <ul class="dropdown inner clearfix">
+                                            <li>
+                                                <a href="/tasks">
+                                                    <span>odoo task</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/tasks">
+                                                    <span>任务</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span>我的账户</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/web/login">
+                                                    <span>登录</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/about">
+                                                    <span>关于</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="widget-container widget_search">
+                                        <div class="inner">
+                                            <form method="get" id="searchform2" action="#">
+                                                <div class="clearfix">
+                                                    <span class="btn btn-small">
+                                                        <input type="submit" id="searchsubmit2" value="Search"/>
+                                                    </span>
+                                                    <div class="input_wrap">
+                                                        <span class="input_icon"></span>
+                                                        <input class="inputField" name="search3" type="text"/>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12"> <!--col-md-offset-2-->
+                                    <div class="widget-container widget_gallery">
+                                        <div class="inner">
+                                            <div id="myCarousel" class="carousel slide" data-interval="20000">
+                                                <!-- Carousel items -->
+                                                <div class="carousel-inner id1">
+                                                    <div class="active item">
+                                                        <img src="/odootask/static/images/temp/main-slider-2.jpg" alt=""
+                                                             style="height: 230px; margin-left: -99px;"/>
+                                                        <div class="carousel-title gradient">
+                                                            <h6>Brave animated series</h6>
+                                                            <p>Disney Pixar</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <img src="/odootask/static/images/temp/top-slider-2.jpg" alt=""
+                                                             style="height: 230px; margin-left: -13px;"/>
+                                                        <div class="carousel-title gradient">
+                                                            <h6>Horton</h6>
+                                                            <p>Change your fate</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <img src="/odootask/static/images/temp/top-slider-3.jpg" alt=""
+                                                             style="height: 230px; margin-left: -13px;"/>
+                                                        <div class="carousel-title gradient">
+                                                            <h6>Surf up</h6>
+                                                            <p>Change your fate</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <img src="/odootask/static/images/temp/top-slider-4.jpg" alt=""
+                                                             style="height: 230px; margin-left: -13px;"/>
+                                                        <div class="carousel-title gradient">
+                                                            <h6>Wall-e</h6>
+                                                            <p>Disney Pixar</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item">
+                                                        <img src="/odootask/static/images/temp/top-slider-1.jpg" alt=""
+                                                             style="height: 230px; margin-left: -13px;"/>
+                                                        <div class="carousel-title gradient">
+                                                            <h6>Ice Age</h6>
+                                                            <p>Change your fate</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Carousel indicators -->
+                                                <ol class="carousel-indicators">
+                                                    <li data-target="#myCarousel" data-slide-to="0"
+                                                        class="active first"></li>
+                                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                                                    <li data-target="#myCarousel" data-slide-to="4" class="last"></li>
+                                                </ol>
+                                                <!-- Carousel nav -->
+                                                <a class="carousel-control left" href="#myCarousel" data-slide="prev"
+                                                   hidefocus="true" style="outline: none;"></a>
+                                                <a class="carousel-control right" href="#myCarousel" data-slide="next"
+                                                   hidefocus="true" style="outline: none;"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="widget-container widget_graph boxed-velvet">
+                                        <div class="inner">
+                                            <div id="graph" class="graph"></div>
+                                            <script src="odootask/static/js/home_graph.js"></script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <p>
+                                        这里写一些文字。
+                                    </p>
+                                </div>
+                            </div>
+                            <t t-raw="0"/>
+                        </div>
+                    </div>
+
+                </body>
+            </html>
+        </template>
+    </data>
+</openerp>

@@ -3,7 +3,7 @@ import openerp.http
 from openerp.http import request
 from base import odootask_qweb_render
 import math
-
+import simplejson as json
 
 class TaskController(openerp.http.Controller):
     @openerp.http.route("/tasks", type='http', auth="public", methods=["GET"])
@@ -51,6 +51,13 @@ class TaskController(openerp.http.Controller):
         context["page_count"] = page_count
 
         return odootask_qweb_render.render("odootask.tasks", context=context)
+
+    @openerp.http.route("/api/tasks", type='http', auth="public", methods=["GET"])
+    def api_tasks(self,**kwargs):
+        env = request.env
+        tasks = env['odootask.task'].sudo().search([])
+        j = json.dumps(tasks)
+        return "%d" % len(tasks)
 
     @openerp.http.route("/task/<int:task_id>", type='http', auth="public", methods=["GET"])
     def task(self, task_id=None, **kwargs):
